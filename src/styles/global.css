@@ -153,3 +153,94 @@ hr {
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
+
+/* Zero home — Rumo-inspired */
+:root {
+	--accent: #111111;
+	--accent-dark: #000000;
+}
+body {
+	background: #fafafa;
+}
+.home .eyebrow {
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	font-size: 0.85rem;
+	color: rgb(var(--gray));
+	margin-bottom: 0.75rem;
+}
+.home h1 {
+	font-size: 2.6rem;
+	font-weight: 700;
+	margin-bottom: 0.75rem;
+}
+.home .lead {
+	font-size: 1.15rem;
+	max-width: 38rem;
+}
+.home .lead.muted {
+	color: rgb(var(--gray));
+}
+.home .quote {
+	margin: 1.75rem 0 2.5rem;
+	padding-left: 1rem;
+	border-left: 3px solid rgb(var(--black));
+	color: rgb(var(--gray-dark));
+	font-style: italic;
+}
+.home .block {
+	margin-top: 2.5rem;
+}
+.home .block h2 {
+	font-size: 1.25rem;
+	margin-bottom: 1rem;
+}
+.home .block h2 span {
+	color: rgb(var(--gray));
+	font-weight: 400;
+	margin-left: 0.35rem;
+}
+.home .post-list,
+.home .card-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.home .post-list li {
+	margin-bottom: 1.25rem;
+}
+.home .post-list a {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	text-decoration: none;
+	color: inherit;
+}
+.home .post-list .title {
+	font-weight: 700;
+}
+.home .post-list time,
+.home .post-list p {
+	color: rgb(var(--gray));
+	font-size: 0.95rem;
+}
+.home .card-list li a {
+	display: block;
+	padding: 1rem 1.1rem;
+	margin-bottom: 0.75rem;
+	border: 1px solid rgba(15, 18, 25, 0.1);
+	border-radius: 12px;
+	text-decoration: none;
+	color: inherit;
+	background: #fff;
+}
+.home .card-list strong {
+	display: block;
+}
+.home .card-list span {
+	color: rgb(var(--gray));
+	font-size: 0.95rem;
+}
+.home .more a {
+	color: rgb(var(--gray-dark));
+}
