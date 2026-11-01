@@ -3,54 +3,38 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PostList from '../components/PostList.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
+import { SITE_DESCRIPTION } from '../consts';
+import { getPosts } from '../posts';
 
-const posts = (await getCollection('blog'))
-   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 6);
+const posts = await getPosts();
+const notes = posts.filter((post) => post.data.feishu);
+const prep = posts.filter((post) => !post.data.feishu);
 ---
 
 <!doctype html>
 <html lang="zh-CN">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title="张梓阳" description={SITE_DESCRIPTION} />
   </head>
   <body>
     <Header />
-    <main class="home">
-      <p class="eyebrow">ZERO · 张梓阳</p>
-      <h1>hi, i'm zero</h1>
-      <p class="lead">
-        学生 / 单片机与嵌入式学习者，正在把蓝桥杯备赛与 C 语言笔记慢慢写成公开的学习空间。
-      </p>
-      <p class="lead muted">
-        A place to learn, write, and build — notes from Lanqiao MCU contests, C foundations, and projects I actually use.
-      </p>
-      <p class="quote">把难的问题拆开，再一块块装回去。</p>
-
-      <section class="block">
-        <h2>Notes <span>笔记</span></h2>
-        <PostList posts={posts} />
-        <p class="more"><a href="/blog/">全部笔记 →</a></p>
+    <main>
+      <section class="intro">
+        <h1>hi, i'm zero</h1>
+        <p class="lead">
+          我是张梓阳，一名正在学单片机和嵌入式的学生。这里放我的蓝桥杯备赛记录、C 语言笔记，还有一些真正用得上的工程。
+        </p>
+        <p class="motto">把难的问题拆开，再一块块装回去。</p>
       </section>
 
       <section class="block">
-        <h2>Projects <span>项目</span></h2>
-        <ul class="card-list">
-          <li>
-            <a href="/blog/lanqiaobei-route/">
-              <strong>蓝桥杯单片机学习路线</strong>
-              <span>从 C 基础到真题测评的完整路径</span>
-            </a>
-          </li>
-          <li>
-            <a href="/blog/lanqiaobei-projects/">
-              <strong>Lanqiaobei_All_Project</strong>
-              <span>模拟题 · 模块训练 · 省赛国赛整理</span>
-            </a>
-          </li>
-        </ul>
+        <h2>学习笔记</h2>
+        <PostList posts={notes} />
+      </section>
+
+      <section class="block">
+        <h2>备赛</h2>
+        <PostList posts={prep} />
       </section>
     </main>
     <Footer />

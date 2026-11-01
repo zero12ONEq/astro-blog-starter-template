@@ -9,7 +9,7 @@ const items = Astro.props.headings.filter((heading) => heading.depth <= 3);
 ---
 
 {
-	items.length >= 6 && (
+	items.length >= 10 && (
 		<>
 			<details class="toc">
 				<summary>目录（{items.length}）</summary>

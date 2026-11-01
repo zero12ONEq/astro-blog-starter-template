@@ -3,13 +3,25 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} Zero · 张梓阳 · zero1024.wiki
+	<span>© {today.getFullYear()} 张梓阳</span>
+	<a href="https://github.com/zero12ONEq" target="_blank" rel="noopener">GitHub</a>
+	<a href="/rss.xml">RSS</a>
 </footer>
 <style>
 	footer {
-		padding: 2em 1em 4em;
-		color: rgb(var(--gray));
-		text-align: center;
-		font-size: 0.9rem;
+		display: flex;
+		gap: 1rem;
+		max-width: var(--column);
+		margin: 0 auto;
+		padding: 2.5rem 1.25rem 3rem;
+		color: var(--muted);
+		font-size: 0.85rem;
+	}
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+	a:hover {
+		color: var(--ink);
 	}
 </style>
