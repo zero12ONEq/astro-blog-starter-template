@@ -13,6 +13,9 @@ const blog = defineCollection({
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string().optional(),
+		// Full text lives in Feishu; the post page only introduces and links to it.
+		feishu: z.string().url().optional(),
+		order: z.number().default(99),
 	}),
 });
 

@@ -3,26 +3,33 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import PostList from '../../components/PostList.astro';
-import { getCollection } from 'astro:content';
+import { getPosts } from '../../posts';
 
-const description = '张梓阳的学习笔记：C 语言、蓝桥杯单片机备赛与项目整理。';
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const description = '我的 C 语言和单片机学习笔记，以及蓝桥杯备赛路线和工程索引。';
+const posts = await getPosts();
+const notes = posts.filter((post) => post.data.feishu);
+const prep = posts.filter((post) => !post.data.feishu);
 ---
 
 <!doctype html>
 <html lang="zh-CN">
 	<head>
-		<BaseHead title="Notes · 笔记" description={description} />
+		<BaseHead title="笔记" description={description} />
 	</head>
 	<body>
 		<Header />
-		<main class="home">
-			<h1>Notes · 笔记</h1>
-			<p class="lead muted">{description}</p>
+		<main>
+			<header class="post-header">
+				<h1>笔记</h1>
+				<p class="lead">{description}</p>
+			</header>
 			<section class="block">
-				<PostList posts={posts} />
+				<h2>学习笔记</h2>
+				<PostList posts={notes} />
+			</section>
+			<section class="block">
+				<h2>备赛</h2>
+				<PostList posts={prep} />
 			</section>
 		</main>
 		<Footer />
