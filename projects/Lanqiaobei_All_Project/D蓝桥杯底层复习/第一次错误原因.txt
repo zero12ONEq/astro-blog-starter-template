@@ -1,0 +1,11 @@
+第一次：
+ad_read() 中代码缺少 I2CSendAck(1); I2CStop(); — 读取AD后没有发送NACK和停止信号
+
+
+led.c中 
+Beep、Motor、Relay 函数缺少 else temp_2 &= (~0xXX); 分支来关闭对应设备
+Led_Off() 标准代码少了 temp_1_old = 0x00; 来重置状态
+
+
+onewire.c — 变量顺序和返回值：
+return (float)(high<<8|low)*0.0625;这句写错了

@@ -1,0 +1,29 @@
+#include <seg.h>
+
+code unsigned char Seg_Wula[]={0xfe,0xfd,0xfb,0xf7,0xef,0xdf};//位码
+code unsigned char Seg_Dula[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71,0x00,0x40,0x73};//段码 0x40表示- 0x73表示P
+
+void Seg_Disp(unsigned char wula,dula,point)
+{
+    //1、消影
+    P0=0x00;
+    P2_6=1;
+    P2_6=0;
+    
+    //2、位选
+    P0=Seg_Wula[wula];
+    P2_7=1;
+    P2_7=0;
+    
+    //3、段选
+    if(point)
+    {
+        P0=Seg_Dula[dula]|0x80;
+    }
+    else
+    {
+        P0=Seg_Dula[dula];
+    }
+    P2_6=1;
+    P2_6=0;
+}

@@ -1,0 +1,27 @@
+[package]
+name = "serial-monitor"
+version = "1.0.0"
+description = "蓝桥杯单片机串口监控助手"
+authors = ["zuolan"]
+license = ""
+repository = ""
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "1.5", features = [] }
+
+[dependencies]
+tauri = { version = "1.5", features = [ "fs-read-dir", "fs-create-dir", "fs-read-file", "fs-write-file", "shell-open"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.35", features = ["full"] }
+serialport = "4.2"
+rusqlite = { version = "0.30", features = ["bundled"] }
+chrono = "0.4"
+
+[features]
+# this feature is used for production builds or when `devPath` points to the filesystem
+# DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]

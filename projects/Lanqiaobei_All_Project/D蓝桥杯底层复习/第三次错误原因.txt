@@ -1,0 +1,2 @@
+1、ulrasound.c中 ut_wave_init EA=0写完记得要写EA=1
+2、key.c中 双按键最好 写成if((P33==0)&&(P32==0)) return 89;

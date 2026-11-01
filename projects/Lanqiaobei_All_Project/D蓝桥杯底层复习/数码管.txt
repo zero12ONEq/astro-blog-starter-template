@@ -1,0 +1,82 @@
+//seg.c
+code unsigned char seg_dula[]={0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x90,0xff,
+								};
+
+//main.c
+idata unsigned char seg_pos;
+pdata unsigned char seg_buf[]={10,10,10,10,10,10,10,10};
+idata unsigned char seg_slow_down;
+idata unsigned char seg_disp_mode;
+//变量区
+idata unsigned int a1;
+idata unsigned int a2;
+idata unsigned int a3_10x;
+idata unsigned int a4_100x;
+void seg_proc()
+{
+	if(seg_slow_down<80) return;
+	seg_slow_down=0;
+	switch(seg_disp_mode)
+	{
+		case 0:
+			//高位熄灭
+			seg_buf[0]=(a1>=1000)?a1/1000%10:10;
+			seg_buf[1]=(a1>=100)?a1/100%10:10;
+			seg_buf[2]=(a1>=10)?a1/10%10:10;
+			seg_buf[3]=a1%10;
+			//没说高位熄灭，正常显示
+			seg_buf[4]=a2/1000%10;
+			seg_buf[5]=a2/100%10;
+			seg_buf[6]=a2/10%10;
+			seg_buf[7]=a2%10;
+			break;
+		case 1:
+			//显示小数点后一位，不高位熄灭
+			seg_buf[0]=a3_10x/1000%10;
+			seg_buf[1]=a3_10x/100%10;
+			seg_buf[2]=a3_10x/10%10+',';
+			seg_buf[3]=a3/10%10;
+			//显示小数点后两位，高位熄灭
+			seg_buf[4]=(a4_100x>=1000)?a4_100x/1000%10:10;
+			seg_buf[5]=a4_100x/100%10+',';
+			seg_buf[6]=a4_100x/10%10;
+			seg_buf[7]=a4_100x%10;
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;			
+	
+	}
+}
+
+
+
+
+
+void Timer1_Init(void)		//1毫秒@12.000MHz
+{
+	AUXR &= 0xBF;			//定时器时钟12T模式
+	TMOD &= 0x0F;			//设置定时器模式
+	TL1 = 0x18;				//设置定时初始值
+	TH1 = 0xFC;				//设置定时初始值
+	TF1 = 0;				//清除TF1标志
+	TR1 = 1;				//定时器1开始计时
+	ET1 = 1;				//使能定时器1中断
+	EA = 1;                 //使能全局中断
+}
+
+
+void Timer1_Isr(void) interrupt 3
+{
+	seg_slow_down++;
+	if(seg_buf[seg_pos]>=20)
+		seg_disp(seg_pos,seg_buf[seg_pos]-',',1);
+	else
+		seg_disp(seg_pos,seg_buf[seg_pos],0);
+	seg_pos=(++seg_pos)%8;
+}

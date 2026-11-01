@@ -1,0 +1,8 @@
+只有当频率测量不是负数时，才更新最大值
+	if(freq_val>=0&&freq_val>freq_max)
+	{
+		freq_max=freq_val;
+		read_rtc(freq_max_time);
+	}
+
+记得要成最后的51，因为传入参数是数字量da_write((1+(4.0/(float)(chaoxian_para-500))*(freq_val-500))*51);
