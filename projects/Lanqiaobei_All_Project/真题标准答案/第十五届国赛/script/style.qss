@@ -1,0 +1,102 @@
+/* 主窗口样式 */
+QMainWindow {
+    background-color: #f5f6fa;
+}
+
+/* 所有按钮的基础样式 */
+QPushButton {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #6c5ce7, stop:1 #a55eea);
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #8075e5, stop:1 #b77eec);
+}
+
+QPushButton:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #564bc0, stop:1 #8e44ea);
+}
+
+/* 下拉框样式 */
+QComboBox {
+    border: 2px solid #6c5ce7;
+    border-radius: 4px;
+    padding: 4px;
+    background: white;
+    min-width: 100px;
+}
+
+QComboBox::drop-down {
+    border: none;
+    background: #6c5ce7;
+    width: 24px;
+}
+
+QComboBox::down-arrow {
+    image: url(styles/down_arrow.png);
+}
+
+/* 文本框样式 */
+QLineEdit {
+    border: 2px solid #6c5ce7;
+    border-radius: 4px;
+    padding: 4px;
+    background: white;
+}
+
+QLineEdit:focus {
+    border-color: #a55eea;
+}
+
+/* 文本显示区域样式 */
+QTextEdit {
+    border: 2px solid #6c5ce7;
+    border-radius: 4px;
+    background: white;
+    padding: 4px;
+}
+
+/* 标签样式 */
+QLabel {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* 状态显示区域样式 */
+QWidget#status_group {
+    background: white;
+    border: 2px solid #6c5ce7;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+/* 左侧面板样式 */
+QWidget#left_panel {
+    background: white;
+    border-right: 2px solid #6c5ce7;
+}
+
+/* 绘图区域样式 */
+PlotWidget {
+    border: 2px solid #6c5ce7;
+    border-radius: 4px;
+    background: white;
+}
+
+/* 分组框样式 */
+QWidget#serial_group, QWidget#coord_widget {
+    background: white;
+    border: 2px solid #6c5ce7;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+/* 状态标签特殊样式 */
+QLabel#status_label {
+    color: #6c5ce7;
+    font-size: 12px;
+} 

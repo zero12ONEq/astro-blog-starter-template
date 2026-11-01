@@ -1,0 +1,9 @@
+  onewire.c — rd_temperature 读取字节顺序不同
+应该先读低8位，再读高八位
+  我的代码 onewire.c:80-81：
+  high=Read_DS18B20();  // 先读high
+  low=Read_DS18B20();   // 再读low
+
+  满分代码 onewire.c:117-118：
+  low = Read_DS18B20();   // 先读low（温度低8位）
+  high = Read_DS18B20();  // 再读high（温度高8位）

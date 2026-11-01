@@ -1,0 +1,1 @@
+pyinstaller --onefile --windowed --icon=lunai.ico --add-data "style.qss;." --add-data "lunai.ico;." --upx-dir="F:\\path\\upx" serial_test.py

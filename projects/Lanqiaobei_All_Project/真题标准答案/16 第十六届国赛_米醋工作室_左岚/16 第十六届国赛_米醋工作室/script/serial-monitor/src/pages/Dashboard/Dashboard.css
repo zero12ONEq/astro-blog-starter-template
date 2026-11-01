@@ -1,0 +1,87 @@
+/* Dashboard JetBrains 样式 */
+.dashboard-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-sidebar {
+  background: #3c3f41;
+  border-right: 1px solid #323232;
+}
+
+.dashboard-sidebar-title {
+  padding: 16px 12px;
+  border-bottom: 1px solid #323232;
+  color: #a9b7c6;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.dashboard-content {
+  flex: 1;
+  overflow-y: auto;
+  background: #2b2b2b;
+}
+
+.dashboard-footer {
+  background: #3c3f41;
+  border-top: 1px solid #323232;
+  padding: 4px 16px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #8a8a8a;
+}
+
+.jetbrains-statusbar-separator {
+  width: 1px;
+  height: 16px;
+  background: #5a5d60;
+  margin: 0 8px;
+}
+
+/* 菜单样式覆盖 */
+.ant-menu-dark {
+  background: transparent !important;
+}
+
+.ant-menu-dark .ant-menu-item {
+  color: #a9b7c6 !important;
+}
+
+.ant-menu-dark .ant-menu-item-selected {
+  background: #365880 !important;
+  color: #ffffff !important;
+  border-left: 3px solid #4a9eff;
+}
+
+.ant-menu-dark .ant-menu-item:hover {
+  background: #4b4d4f !important;
+  color: #ffffff !important;
+}
+
+.ant-menu-dark .ant-menu-item-icon {
+  font-size: 14px;
+}
+
+/* 滚动优化 */
+.dashboard-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.dashboard-content::-webkit-scrollbar-track {
+  background: #2b2b2b;
+  border-left: 1px solid #323232;
+}
+
+.dashboard-content::-webkit-scrollbar-thumb {
+  background: #595959;
+  border-radius: 4px;
+}
+
+.dashboard-content::-webkit-scrollbar-thumb:hover {
+  background: #6f6f6f;
+}
