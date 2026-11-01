@@ -1,0 +1,23 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title="404 · 页面不存在" description="这个页面不存在。" />
+		<meta name="robots" content="noindex" />
+	</head>
+	<body>
+		<Header />
+		<main class="home">
+			<p class="eyebrow">404</p>
+			<h1>页面不存在</h1>
+			<p class="lead muted">这个地址可能写错了，或者内容已经移走。</p>
+			<p class="more"><a href="/">回到首页</a> · <a href="/blog/">查看全部笔记</a></p>
+		</main>
+		<Footer />
+	</body>
+</html>
