@@ -1,0 +1,27 @@
+<script>
+	if (navigator.clipboard) {
+		for (const pre of document.querySelectorAll('.prose pre')) {
+			const wrapper = document.createElement('div');
+			wrapper.className = 'code-block';
+			pre.replaceWith(wrapper);
+			wrapper.append(pre);
+
+			const button = document.createElement('button');
+			button.type = 'button';
+			button.className = 'code-copy';
+			button.textContent = '复制';
+			button.addEventListener('click', async () => {
+				try {
+					await navigator.clipboard.writeText(pre.textContent ?? '');
+					button.textContent = '已复制';
+				} catch {
+					button.textContent = '复制失败';
+				}
+				setTimeout(() => {
+					button.textContent = '复制';
+				}, 1500);
+			});
+			wrapper.append(button);
+		}
+	}
+</script>
