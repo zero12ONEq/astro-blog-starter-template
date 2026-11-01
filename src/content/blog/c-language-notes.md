@@ -2,7 +2,6 @@
 title: 'C 语言学习笔记'
 description: '从环境安装到运算符与表达式的完整笔记（第 1–5 章），后章提纲与贪吃蛇节选；面向 51 / 嵌入式备赛（自飞书迁入）'
 pubDate: 'Nov 01 2026'
-heroImage: '/blog-placeholder-3.jpg'
 ---
 
 这篇对应飞书文档《C 语言学习笔记》，迁到博客后做了排版清理。可与 [蓝桥杯单片机学习路线](/blog/lanqiaobei-route/) 一起用：C 学到指针之前就可以开单片机。

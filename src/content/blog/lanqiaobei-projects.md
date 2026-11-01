@@ -2,7 +2,6 @@
 title: 'Lanqiaobei_All_Project 项目索引'
 description: '蓝桥杯单片机工程源码的公开索引，按模拟题、模块、省赛国赛、复习和模板分组'
 pubDate: 'Nov 01 2026'
-heroImage: '/blog-placeholder-2.jpg'
 ---
 
 工程源码在本仓库 [`projects/Lanqiaobei_All_Project/`](https://github.com/zero12ONEq/astro-blog-starter-template/tree/main/projects/Lanqiaobei_All_Project)。视频、安装包，以及 Keil 的 Listings / Objects / DebugConfig / RTE 等编译产物没有放进来，留下的是 `.c` / `.h`、经典 `.uvproj` 工程、文档和图片。

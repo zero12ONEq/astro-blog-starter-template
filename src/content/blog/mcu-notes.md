@@ -2,14 +2,13 @@
 title: '蓝桥杯单片机课程笔记'
 description: '西风 51 课程与蓝桥杯外设备赛笔记：从选型、LED/按键/数码管到 DS18B20、IIC、超声波、串口与调度器（自飞书迁入）'
 pubDate: 'Nov 01 2026'
-heroImage: '/blog-placeholder-4.jpg'
 ---
 
 这篇是备赛时整理的《51 单片机开发指南》笔记，从零基础到蓝桥杯 V4T / 调度器模板。配套工程见 [Lanqiaobei_All_Project 项目索引](/blog/lanqiaobei-projects/)，学习顺序见 [蓝桥杯单片机学习路线](/blog/lanqiaobei-route/)。
 
 原文（需飞书权限）：[飞书 wiki](https://jcnhbbefrpfc.feishu.cn/wiki/Fqlrw4vb2iTWuYkTrOUcq6swnnh)
 
-> 说明：Keil / Proteus 截图、原理图与完整驱动源码多数是图片，正文用「（原图示，见飞书）」标出；下方保留导出里真实存在的文字代码。
+> 说明：Keil / Proteus 截图和原理图多数是图片，尚未迁入，正文用「（原图示，见飞书）」标出。原本是截图的驱动源码，已改为链接到仓库里的[模板工程](https://github.com/zero12ONEq/astro-blog-starter-template/tree/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89)，与原截图可能略有出入。
 
 ## 备赛入口
 
@@ -125,7 +124,7 @@ P0 上电为开漏，无内部上拉，要外接上拉。输入同样先写 1，
 
 - **实验 1**：按下按键 1 瞬间灯 1 亮，松开灭；长按按键 2 灯 2 亮，松开灭。（代码为截图）
 - **实验 2**：按键 1 流水灯运行，按键 2 停止。48–55 行的 if 标志位可改成 switch：`Key_Down==1` 时 `System_Flag=1`；`Key_Down==2` 时 `System_Flag=0`
-- **实验 3**：彩灯控制系统，完整代码为多张截图（见飞书）
+- **实验 3**：彩灯控制系统，完整代码为多张截图（见飞书）；后续加入数码管和定时器的版本见[彩灯控制系统工程](https://github.com/zero12ONEq/astro-blog-starter-template/tree/main/projects/Lanqiaobei_All_Project/A%E5%BD%A9%E7%81%AF%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F%EF%BC%88led%EF%BC%8Ckey%EF%BC%8Cseg%EF%BC%8C%E5%AE%9A%E6%97%B6%E5%99%A8%EF%BC%89/%E6%BA%90%E7%A0%81)
 
 ### 矩阵键盘
 
@@ -186,11 +185,11 @@ D0–D7 对应 P00–P07。二极管一端 5 V，另一端经 74HC573 接到 P00
    - 所以 P0 写 `0x00`
    - Y5C 打开该锁存器：要 Y5 低电平，CBA=101，即 P27=1 P26=0 P25=1，`(P2&0x1f)|0xa0`，然后再 `P2=P2&0x1f` 关掉
 
-（`init.c` / `init.h` / `led.c` / `led.h` 完整源码为截图，见飞书）
+完整源码见 V4T 模板：[`init.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/init.c) / [`init.h`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/init.h)、[`led.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/led.c) / [`led.h`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/led.h)。
 
 ### 按键
 
-独立按键和矩阵按键靠跳线帽区分。（`key.c` / `key.h` 为截图，见飞书）
+独立按键和矩阵按键靠跳线帽区分。完整源码见 [`key.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/key.c) / [`key.h`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/key.h)。
 
 ### 共阳数码管
 
@@ -226,7 +225,7 @@ void Config_Temper(unsigned char dat)
 }
 ```
 
-「从 DS18B20 读」一节主要是截图（见飞书）。题目解答见《51 单片机习题汇总》的《DS18B20 温度采集器》。
+「从 DS18B20 读」一节的原图未迁入（见飞书），工程见 [DS18B20 模块训练](https://github.com/zero12ONEq/astro-blog-starter-template/tree/main/projects/Lanqiaobei_All_Project/B%E8%93%9D%E6%A1%A5%E6%9D%AF%E6%A8%A1%E5%9D%97%E8%AE%AD%E7%BB%83%EF%BC%88DS18B20%E6%B8%A9%E5%BA%A6%E9%87%87%E9%9B%86%E8%A3%85%E7%BD%AE%EF%BC%89/STC15F2K60S2)。题目解答见《51 单片机习题汇总》的《DS18B20 温度采集器》。
 
 ### PCF8591
 
@@ -258,13 +257,13 @@ void Config_Temper(unsigned char dat)
 
 简单应用：模式 0 显示 `dat[]={30,60}`，S19 / S18 各加 10，S17 存入 EEPROM，断电再上电应显示保存值。模式 1 用三位显示 `unsigned char a`（初值 200），S16 减 10，S15 加 10，S14 保存。`unsigned int` 的写入「未来再补」。
 
-测试时先注释 `EEPROM_Read`，改值，仿真断电，再取消注释编译，频率要设 12 MHz。（代码为截图，见飞书）
+测试时先注释 `EEPROM_Read`，改值，仿真断电，再取消注释编译，频率要设 12 MHz。代码见 [AT24C02 模块训练](https://github.com/zero12ONEq/astro-blog-starter-template/tree/main/projects/Lanqiaobei_All_Project/B%E8%93%9D%E6%A1%A5%E6%9D%AF%E6%A8%A1%E5%9D%97%E8%AE%AD%E7%BB%83%EF%BC%88AT24C02%EF%BC%89/STC15F2K60S2)。
 
 ## 蓝桥杯 V4T 调度器模板
 
 每写完一个底层用 debug 看一遍。`led.c` 的 debug 在小鹅通 V4T 大模板 21:19–24:30。
 
-`idata` 的意义见截图。`led.c`、`led.h`、`init.c`、`init.h`、`seg.c`、`seg.h` 本体多为截图（见飞书）。
+`idata` 的意义见截图（见飞书）。源码见 V4T 模板：[`led.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/led.c) / [`led.h`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/led.h)、[`init.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/init.c) / [`init.h`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/init.h)、[`seg.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/seg.c) / [`seg.h`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/seg.h)。
 
 ### 数码管小数点技巧
 
@@ -317,13 +316,13 @@ Debug：把 `ucRtc` 放进观察窗口，在指定行打断点再运行。
 
 ### 模板里的 DS18B20 / IIC
 
-`onewire.c` / `.h`、PCF8591 的 `iic.c` / `.h`、AT24C02 的 `iic.c` / `.h` 均为截图（见飞书）。
+源码见 V4T 模板：[`onewire.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/onewire.c) / [`onewire.h`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/onewire.h)；PCF8591 和 AT24C02 共用 [`iic.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/iic.c) / [`iic.h`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/iic.h)。
 
 ### 超声波
 
 一发一收，时间乘声速得距离。发送 8 个 40 kHz 方波。\(f=40000\,\mathrm{Hz}\)，\(T=25\,\mu\mathrm{s}\)，高低电平各 12.5 μs。
 
-延时默认用 Y1 指令集，测不准改 Y5。CMOD 配置、发送函数、测距函数、`ultrasound.c` / `.h` 为截图（见飞书）。
+延时默认用 Y1 指令集，测不准改 Y5。CMOD 配置、发送函数、测距函数见 [`ultrasound.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/ultrasound.c) / [`ultrasound.h`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/ultrasound.h)。
 
 ### NE555 测频
 
@@ -331,7 +330,7 @@ Debug：把 `ucRtc` 放进观察窗口，在指定行打断点再运行。
 
 ### PWM
 
-通常考 LED 调光。变量定义和定时器 1 中断里的代码见截图（见飞书）。
+通常考 LED 调光。变量定义和定时器 1 中断里的代码见调度器模板的 [`main.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88%E8%B0%83%E5%BA%A6%E5%99%A8%EF%BC%89/User/main.c)（`pwm_period`、`pwm_compare`）。
 
 ### 串口
 
@@ -341,16 +340,16 @@ Debug：把 `ucRtc` 放进观察窗口，在指定行打断点再运行。
 
 **重定向：** 包含 `stdio.h`，自己实现 `putchar`，这样 `printf` 走串口。
 
-`main` 思路：串口 1 每收到一位就进中断，存入缓冲区；溢出则清空；两次接收间隔超过 10 ms 就解析已收到的数据。也可用 `printf` 把按键值打到串口来调试。（`uart.c` / `.h` 和 main 片段多为截图，见飞书）
+`main` 思路：串口 1 每收到一位就进中断，存入缓冲区；溢出则清空；两次接收间隔超过 10 ms 就解析已收到的数据。也可用 `printf` 把按键值打到串口来调试。源码见 [`uart.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/uart.c) / [`uart.h`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/Driver/uart.h)，main 片段见 V4T 模板的 [`main.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89/User/main.c)。
 
 ### V4T 与调度器
 
-**V4T：** 前面底层都写好后，用定时器加 `main` 里 `while(1)` 轮询。（总图见飞书）
+**V4T：** 前面底层都写好后，用定时器加 `main` 里 `while(1)` 轮询，工程见 [V4T 模板](https://github.com/zero12ONEq/astro-blog-starter-template/tree/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88V4T%EF%BC%89)。（总图见飞书）
 
 **调度器**是另一套模板：
 
 1. 删掉所有 `slow_down` 变量
 2. 定义系统滴答计数器，放在定时器 1 中断里自增
-3. 书写调度器（代码为截图，见飞书）
+3. 书写调度器，代码见调度器模板的 [`main.c`](https://github.com/zero12ONEq/astro-blog-starter-template/blob/main/projects/Lanqiaobei_All_Project/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E6%A8%A1%E6%9D%BF%EF%BC%88%E8%B0%83%E5%BA%A6%E5%99%A8%EF%BC%89/User/main.c)（`Scheduler_Init` / `Scheduler_Run`）
 
 这是目录最后一节（13、调度器）。模板与真题工程对照见 [项目索引](/blog/lanqiaobei-projects/)。

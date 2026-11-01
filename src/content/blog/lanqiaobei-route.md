@@ -2,7 +2,6 @@
 title: '蓝桥杯单片机学习路线'
 description: '从 C 语言基础到真题测评：我实际走过的备赛路径'
 pubDate: 'Nov 01 2026'
-heroImage: '/blog-placeholder-1.jpg'
 ---
 
 这是我给自己（也给后来者）整理的备赛路线，原文来自学习规划文档，迁到博客后略作排版。
